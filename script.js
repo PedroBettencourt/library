@@ -9,6 +9,24 @@ function Book(name, author, year, pages, read) {
     this.read = read;
 }
 
+function eventRead(e) {
+    const btn = e.target;
+    // Change display
+    (btn.textContent === "true") ? btn.textContent = "false" : btn.textContent = "true";
+        
+    // Change library
+    const row = btn.parentNode.parentNode;
+    const bookId = row.dataset.id;
+    const book = myLibrary.filter(bookLibrary => bookLibrary.id === bookId)[0]
+    book.toggleRead();
+}
+
+function eventDelete(e) {
+    const row = e.target.parentNode.parentNode;
+    const bookId = row.dataset.id;
+    deleteBook(bookId);
+}
+
 function addBookToLibrary(book) {
     myLibrary.push(book);
 }
@@ -26,6 +44,10 @@ function displayBook(book) {
     // Each book is displayed with its unique id
     row.dataset.id = book.id;
     table.appendChild(row);
+
+    // Add event listeners
+    row.querySelector("button.read").addEventListener("click", (e) => eventRead(e));
+    row.querySelector("button.delete").addEventListener("click", (e) => eventDelete(e));
 }
 
 function displayLibrary() {
@@ -67,28 +89,4 @@ form.addEventListener("submit", (e) => {
 
     addBookToLibrary(book);
     displayBook(book);
-});
-
-const removeButton = document.querySelectorAll("button.delete");
-removeButton.forEach(btn => {
-    btn.addEventListener("click", (e) => {
-        const row = e.target.parentNode.parentNode;
-        const bookId = row.dataset.id;
-        deleteBook(bookId);
-    });
-});
-
-const readButton = document.querySelectorAll("button.read");
-readButton.forEach(btn =>  {
-    btn.addEventListener("click", (e) => {
-        // Change display
-        (btn.textContent === "true") ? btn.textContent = "false" : btn.textContent = "true";
-        
-        // Change library
-        const row = e.target.parentNode.parentNode;
-        const bookId = row.dataset.id;
-        const book = myLibrary.filter(bookLibrary => bookLibrary.id === bookId)[0]
-        book.toggleRead();
-        console.log(book.read)
-    });
 });
