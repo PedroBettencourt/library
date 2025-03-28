@@ -32,7 +32,7 @@ function addBookToLibrary(book) {
 }
 
 function displayBook(book) {
-    const table = document.querySelector("table");
+    const table = document.querySelector("tbody");
     const row = document.createElement("tr");
     row.innerHTML += `<td>${book.name}</td>
                       <td>${book.author}</td>
@@ -83,7 +83,9 @@ form.addEventListener("submit", (e) => {
     const author = form.elements.author.value;
     const year = form.elements.year.value;
     const pages = form.elements.pages.value;
-    const read = form.elements.read.value;
+    const read = form.elements.read.checked;
+
+    console.log(read)
     
     const book = new Book(name, author, year, pages, read);
 

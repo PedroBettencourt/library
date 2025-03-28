@@ -9,7 +9,7 @@
 </head>
 <body>
 
-    <h1>Library</h1>
+    <h1>Add Books</h1>
 
     <form action="" method="post">
         <div>
@@ -28,25 +28,30 @@
             <label for="pages">Pages</label>
             <input type="tel" id="pages" name="pages" required>
         </div>
-        <div>
-            <label for="true">Read</label>
-            <input type="radio" id="true" name="read" value="read" required>
-            <label for="false">Not read</label>
-            <input type="radio" id="false" name="read" value="false">
+        <div class="read">
+            <label for="read">Read</label>
+            <input type="checkbox" id="read" name="read" value="read">
         </div>
         <div>
             <button type="submit">Submit book</button>
         </div>
     </form>
 
+    <h1>My Library</h1>
     <table>
-        <tr>
-            <th>Title</th>
-            <th>Author</th>
-            <th>Year</th>
-            <th>Pages</th>
-            <th>Read</th>
-        </tr>
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Author</th>
+                <th>Year</th>
+                <th>Pages</th>
+                <th>Read</th>
+                <th>Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+        </tbody>
     </table>    
 </body>
 </html>

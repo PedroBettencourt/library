@@ -1,3 +1,98 @@
+html, body {
+    font-family: Helvetica, sans-serif;
+    font-size: 16px;
+    padding: 20px;
+}
+
+form {
+    display: grid;
+    grid-template-columns: 20em 20em;
+    row-gap: 10px;
+    padding-bottom: 50px;
+}
+
+div {
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    font-weight: bold;
+}
+
+input {
+    all: unset;
+    width: 15em;
+    border-radius: 3px;
+    border: 2px solid gray;
+}
+
+input[type="checkbox"] {
+    position: relative;
+    width: 1em;
+    height: 1em;
+    border-radius: 2px;
+    border: 3px solid black;
+}
+
+input[type="checkbox"]:focus {
+    border-color: black;
+}
+
+input[type="checkbox"]:checked {
+    background-color: rgb(13, 149, 194);
+}
+
+input[type="checkbox"]:checked::after {
+    position: relative;
+    content: "✔";
+    top: -2px;
+    left: 2px;
+    color: white;
+}
+
+input:invalid {
+    border-color: red;
+}
+
+input:focus {
+    border-color: rgb(13, 149, 194);
+}
+
+div.read {
+    flex-direction: row;
+    gap: 10px;
+}
+
 form button {
-    background-color: aliceblue;
+    width: 10em;
+    border-radius: 5px;
+    border: 2px solid gray;
+}
+
+table {
+    border-collapse: collapse;
+    min-width: 30em;
+    box-shadow: 0 0px 5px rgba(0, 0, 0, 0.15);
+}
+
+thead tr {
+    background-color: lavender;
+    text-align: left;
+}
+
+th, td {
+    padding: 10px 20px;
+}
+
+tbody tr {
+    border-bottom: 1px solid lightgray;
+}
+
+tbody tr:nth-of-type(odd) {
+    background-color: lavenderblush;
+}
+
+tbody tr:nth-of-type(even) {
+    background-color: floralwhite;
 }
