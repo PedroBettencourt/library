@@ -1,12 +1,19 @@
 let myLibrary = [];
 
-function Book(name, author, year, pages, read) {
-    this.id = crypto.randomUUID();
-    this.name = name;
-    this.author = author;
-    this.year = year;
-    this.pages = pages;
-    this.read = read;
+class Book {
+    constructor (name, author, year, pages, read) {
+        this.id = crypto.randomUUID();
+        this.name = name;
+        this.author = author;
+        this.year = year;
+        this.pages = pages;
+        this.read = read;
+    }
+    
+    toggleRead() {
+        (this.read) ? this.read = false : this.read=true;
+    }
+
 }
 
 function eventRead(e) {
@@ -64,10 +71,6 @@ function deleteBook(id) {
     const row = document.querySelector(`tr[data-id="${id}"]`);
     row.remove();
 }
-
-Book.prototype.toggleRead = function() {
-    (this.read) ? this.read = false : this.read=true;
-};
 
 book1 = new Book("The Farthest Shore", "Ursula Le Guin", 1972, 259, false)
 book2 = new Book("The Song of Achilles", "Madeline Miller", 2011, 408, true)
