@@ -1,12 +1,17 @@
 let myLibrary = [];
 
-function Book(name, author, year, pages, read) {
-    this.id = crypto.randomUUID();
-    this.name = name;
-    this.author = author;
-    this.year = year;
-    this.pages = pages;
-    this.read = read;
+class Book {
+    constructor(name, author, year, pages, read) {
+        this.id = crypto.randomUUID();
+        this.name = name;
+        this.author = author;
+        this.year = year;
+        this.pages = pages;
+        this.read = read;
+    }
+    toggleRead() {
+        (this.read) ? this.read = false : this.read = true;
+    }
 }
 
 function eventRead(e) {
@@ -27,8 +32,10 @@ function eventDelete(e) {
     deleteBook(bookId);
 }
 
-function addBookToLibrary(book) {
+function addBook(name, author, year, pages, read) {
+    const book = new Book(name, author, year, pages, read)
     myLibrary.push(book);
+    return book;
 }
 
 function displayBook(book) {
@@ -65,30 +72,51 @@ function deleteBook(id) {
     row.remove();
 }
 
-Book.prototype.toggleRead = function() {
-    (this.read) ? this.read = false : this.read=true;
-};
-
-book1 = new Book("The Farthest Shore", "Ursula Le Guin", 1972, 259, false)
-book2 = new Book("The Song of Achilles", "Madeline Miller", 2011, 408, true)
-addBookToLibrary(book1);
-addBookToLibrary(book2);
-displayLibrary()
+// Form
+// Display error messages
+function checkValidity(property, message) {
+    property.addEventListener("blur", () => {
+        property.setCustomValidity("");
+        if (!property.checkValidity()) {
+            property.setCustomValidity(message);
+            property.reportValidity();
+        } else {
+            return property;
+        }
+    })
+}
 
 const form = document.querySelector("form");
+
+const title = document.querySelector("#name");
+const author = document.querySelector("#author");
+const year = document.querySelector("#year");
+const pages = document.querySelector("#pages");
+const read = document.querySelector("#read");
+
+checkValidity(title, "Needs a name with less than 30 characters");
+checkValidity(author, "Needs a name with less than 30 characters");
+checkValidity(year, "Year needs to be a number with less than 4 digits");
+checkValidity(pages, "Pages need to be a number");
+
 form.addEventListener("submit", (e) => {
     e.preventDefault();
+    const titleValue = title.value;
+    const authorValue = author.value;
+    const yearValue = year.value;
+    const pagesValue = pages.value;
+    const readValue = read.value;
 
-    const name = form.elements.name.value;
-    const author = form.elements.author.value;
-    const year = form.elements.year.value;
-    const pages = form.elements.pages.value;
-    const read = form.elements.read.checked;
-
-    console.log(read)
-    
-    const book = new Book(name, author, year, pages, read);
-
-    addBookToLibrary(book);
-    displayBook(book);
+    if (titleValue !== "" && authorValue !== "" && yearValue !== "" &&
+        pagesValue !== "" && readValue !== "") {
+            const book = addBook(titleValue, authorValue, yearValue, pagesValue, readValue);
+            displayBook(book);
+        }
 });
+
+
+// Example books
+addBook("The Farthest Shore", "Ursula Le Guin", 1972, 259, false);
+addBook("The Song of Achilles", "Madeline Miller", 2011, 408, true);
+
+displayLibrary()
