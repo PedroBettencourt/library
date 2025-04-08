@@ -105,7 +105,7 @@ form.addEventListener("submit", (e) => {
     const authorValue = author.value;
     const yearValue = year.value;
     const pagesValue = pages.value;
-    const readValue = read.value;
+    const readValue = read.checked;
 
     if (titleValue !== "" && authorValue !== "" && yearValue !== "" &&
         pagesValue !== "" && readValue !== "") {
